@@ -11,7 +11,7 @@ import SwiftUI
 struct RickAndMortyDataApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DownloadWithEscaping()
         }
     }
 }

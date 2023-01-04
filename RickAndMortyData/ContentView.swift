@@ -6,68 +6,99 @@
 //
 
 import SwiftUI
-//import Combine
+import Combine
+
+
+
+class WizardViewModel: ObservableObject{
+    @Published var wizards: [Wizard] = []
+    var cancellables = Set<AnyCancellable>()
+    
+    init(){
+        loadWizards()
+    }
+    
+    func loadWizards(){
+        guard let url = URL(string: "https://wizard-world-api.herokuapp.com/Wizards") else { return }
+        
+        
+        //Combine discussion
+        //1. sign up for monthly subscriptuon for package to be delivered
+        //2. the company would make the package behind the scene
+        //3. receive the package at your front door
+        //4. make sure the boz isn't damaged
+        //5. open and make sure the item is correct
+        //6. use the item
+        //7. cancellable at any time!
+        
+        //1. create the publisher
+        //2. subscribe the publisher on the background thread
+        //3. receive on main thread
+        //4. tryMap (check that the data is good)
+        //5. decode data into PostModels
+        //6. sink (put the item into our app)
+        //7. store (cancel subscriptuon if needed)
+        URLSession.shared.dataTaskPublisher(for: url)
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: DispatchQueue.main)
+            .tryMap(handleOutput)
+            .decode(type: [Wizard].self, decoder: JSONDecoder())
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    print("There was an error \(error)")
+                }
+            } receiveValue: { [weak self] (returnedPosts) in
+                self?.wizards = returnedPosts
+            }
+            .store(in: &cancellables)
+       
+    }
+    
+    func handleOutput (output: URLSession.DataTaskPublisher.Output) throws -> Data {
+        guard let response = output.response as? HTTPURLResponse,
+              response.statusCode >= 200 && response.statusCode <= 300 else {
+            throw URLError(.badServerResponse)
+        }
+        return output.data
+    }
+}
+
+
+
 
 struct ContentView: View {
     // The characters array that will store the fetched data
-    @State var characters: [Character] = []
+    @StateObject var vm = WizardViewModel()
+    
+    
+ 
 
     var body: some View {
         // Use a List to display the characters
-        VStack{
-            List(characters) { character in
-                HStack{
-                    AsyncImage(url: URL(string: character.image), scale: 3) {
-                        image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    } placeholder: {
-                        ProgressView()
-                        
+        NavigationView{
+            VStack{
+                List(vm.wizards) { wizard in
+                    HStack{
+                        Text(wizard.firstName ?? "")
+                        Text(wizard.lastName ?? "")
+                        ForEach(wizard.elixirs){elixir in
+                            Text(elixir.name)
+                            
+                        }
                     }
-                    .frame(height: 50)
-//                        .resizable()
-//                        .frame(width: 50, height: 50)
 
-                    Text(character.name)
-                }
-                }
-            .onAppear(perform: loadData)
+                   
+                    }
+            }
         }
       
     }
 
-
-    // The loadData method that fetches and decodes the JSON data from the API
-    func loadData() {
-        // Use the URLSession API to fetch the JSON data from the API
-        URLSession.shared.dataTask(with: URL(string: "https://rickandmortyapi.com/api/character")!) { (data, response, error) in
-            // Ensure that we have data and no error
-            guard let data = data, error == nil else { return }
-
-            // Decode the JSON data into the root JSON object
-            let json = try! JSONDecoder().decode(RootJSON.self, from: data)
-
-            // Set the characters array to the results from the JSON object
-            DispatchQueue.main.async {
-                self.characters = json.results
-                print(characters)
-            }
-        }.resume()
-    }
 }
 
-
-struct DetailedView: View {
-    @State var characters: [Character] = []
-    
-    var body: some View {
-        List(characters) { character in
-        Text(character.location.name)
-                   }
-    }
-}
 
 
 

@@ -11,7 +11,9 @@
 		AC33CC72293BCD49004F1E90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC33CC71293BCD49004F1E90 /* ContentView.swift */; };
 		AC33CC74293BCD4A004F1E90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC33CC73293BCD4A004F1E90 /* Assets.xcassets */; };
 		AC33CC77293BCD4A004F1E90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC33CC76293BCD4A004F1E90 /* Preview Assets.xcassets */; };
-		AC33CC7E293BCD9C004F1E90 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC33CC7D293BCD9C004F1E90 /* Character.swift */; };
+		AC33CC7E293BCD9C004F1E90 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC33CC7D293BCD9C004F1E90 /* CharacterModel.swift */; };
+		AC33CC85293BDE7B004F1E90 /* CharacterData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC33CC83293BDE7B004F1E90 /* CharacterData.xcdatamodeld */; };
+		AC4C2FAA29650122004B1E4C /* DownloadWithEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C2FA929650122004B1E4C /* DownloadWithEscaping.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,7 +22,9 @@
 		AC33CC71293BCD49004F1E90 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AC33CC73293BCD4A004F1E90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC33CC76293BCD4A004F1E90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AC33CC7D293BCD9C004F1E90 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		AC33CC7D293BCD9C004F1E90 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
+		AC33CC84293BDE7B004F1E90 /* CharacterData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CharacterData.xcdatamodel; sourceTree = "<group>"; };
+		AC4C2FA929650122004B1E4C /* DownloadWithEscaping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadWithEscaping.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +59,9 @@
 			children = (
 				AC33CC6F293BCD49004F1E90 /* RickAndMortyDataApp.swift */,
 				AC33CC71293BCD49004F1E90 /* ContentView.swift */,
-				AC33CC7D293BCD9C004F1E90 /* Character.swift */,
+				AC4C2FA929650122004B1E4C /* DownloadWithEscaping.swift */,
+				AC33CC7D293BCD9C004F1E90 /* CharacterModel.swift */,
+				AC33CC83293BDE7B004F1E90 /* CharacterData.xcdatamodeld */,
 				AC33CC73293BCD4A004F1E90 /* Assets.xcassets */,
 				AC33CC75293BCD4A004F1E90 /* Preview Content */,
 			);
@@ -140,9 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC33CC7E293BCD9C004F1E90 /* Character.swift in Sources */,
+				AC4C2FAA29650122004B1E4C /* DownloadWithEscaping.swift in Sources */,
+				AC33CC7E293BCD9C004F1E90 /* CharacterModel.swift in Sources */,
 				AC33CC72293BCD49004F1E90 /* ContentView.swift in Sources */,
 				AC33CC70293BCD49004F1E90 /* RickAndMortyDataApp.swift in Sources */,
+				AC33CC85293BDE7B004F1E90 /* CharacterData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +351,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AC33CC83293BDE7B004F1E90 /* CharacterData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AC33CC84293BDE7B004F1E90 /* CharacterData.xcdatamodel */,
+			);
+			currentVersion = AC33CC84293BDE7B004F1E90 /* CharacterData.xcdatamodel */;
+			path = CharacterData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AC33CC64293BCD49004F1E90 /* Project object */;
 }
